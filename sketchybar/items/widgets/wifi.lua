@@ -58,6 +58,7 @@ local wifi_down = sbar.add("item", "widgets.wifi2", {
 local wifi = sbar.add("item", "widgets.wifi.padding", {
   position = "right",
   label = { drawing = false },
+  icon = { drawing = false },  -- Hide WiFi signal icon for desktop Mac
 })
 
 -- Background around the item
