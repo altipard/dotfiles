@@ -30,9 +30,8 @@ update_repo() {
 }
 
 update_homebrew() {
-    log_info "Updating Homebrew packages..."
+    log_info "Updating Homebrew packages from Brewfile..."
     brew update
-    brew upgrade
     brew bundle --file="$DOTFILES/homebrew/Brewfile" --no-lock
     brew cleanup
 }
