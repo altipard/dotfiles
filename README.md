@@ -13,6 +13,7 @@ Meine persönliche macOS-Konfiguration mit automatisierter Installation.
 ├── homebrew/     # Homebrew Packages (Brewfile)
 ├── aerospace/   # Aerospace Window Manager
 ├── karabiner/    # Karabiner-Elements (Keyboard Remapping)
+├── sketchybar/   # SketchyBar (macOS Status Bar)
 ├── ghostty/      # Ghostty Terminal
 ├── macos/        # macOS-spezifische Einstellungen
 ├── bin/          # Eigene Scripts
@@ -114,6 +115,44 @@ Ermöglicht die Space-Bar als Modifier-Key zu nutzen:
 - Konfiguration in `karabiner/karabiner.json`
 - Profil "Aerospace Meh Key" wird automatisch erstellt
 - Nach Installation in Karabiner-Elements aktivieren
+
+### SketchyBar
+Hochgradig anpassbare macOS-Statusleiste mit Lua-Konfiguration:
+- Vollständig konfigurierbar via Lua
+- Unterstützt Workspaces, System-Monitoring, und App-Indikatoren
+- Nahtlose Integration mit Aerospace Window Manager
+  - Zeigt alle AeroSpace-Workspaces in der Statusleiste
+  - Klickbare Workspace-Buttons zum schnellen Wechseln
+  - Live-Updates der App-Icons in jedem Workspace
+  - Automatische Erkennung neuer/gelöschter Workspaces
+- GPU-beschleunigte Darstellung
+- App-Icons via SketchyBar-App-Font (wird automatisch installiert)
+
+#### macOS Menüleiste ausblenden
+Um die native macOS-Menüleiste auszublenden und SketchyBar als Ersatz zu nutzen:
+
+1. **Systemeinstellungen öffnen**:
+   - Apple Menü → Systemeinstellungen → Schreibtisch & Dock
+
+2. **Menüleiste automatisch ausblenden**:
+   - Option "Menüleiste automatisch ein- und ausblenden" aktivieren
+   - Wähle "Immer" aus dem Dropdown-Menü
+
+3. **Alternative via Terminal**:
+   ```bash
+   # Menüleiste immer ausblenden
+   defaults write NSGlobalDomain _HIHideMenuBar -bool true
+   
+   # Änderungen anwenden (Neustart erforderlich)
+   killall Finder
+   ```
+
+4. **Rückgängig machen**:
+   ```bash
+   # Menüleiste wieder anzeigen
+   defaults write NSGlobalDomain _HIHideMenuBar -bool false
+   killall Finder
+   ```
 
 ### Ghostty
 Modernes GPU-beschleunigtes Terminal mit nativer macOS-Integration.

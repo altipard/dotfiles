@@ -7,6 +7,7 @@
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "nikitabobko/tap"
+tap "FelixKratz/formulae"
 
 # ============================================================================
 # Command Line Tools
@@ -53,6 +54,7 @@ cask "docker"
 # Productivity
 cask "aerospace"  # Tiling window manager
 cask "karabiner-elements"  # Keyboard customization for Meh key
+brew "sketchybar"  # Customizable macOS status bar
 # cask "rectangle"  # Window management (replaced by aerospace)
 # cask "raycast"    # Spotlight replacement
 

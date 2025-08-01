@@ -6,17 +6,27 @@
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
+# Default layout for new workspaces
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'horizontal'
+
 # Mouse settings
 # Disable focus follows mouse
 on-focus-changed = []
 
 # Gaps configuration
-gaps.inner.horizontal = 5
-gaps.inner.vertical = 5
-gaps.outer.left = 5
-gaps.outer.bottom = 5
-gaps.outer.top = 5
-gaps.outer.right = 5
+# Handle different top gaps for built-in display (notch) vs external displays (Sketchybar)
+[gaps]
+inner.horizontal = 8
+inner.vertical = 8
+outer.bottom = 5
+outer.top = [
+  { monitor."built-in" = 10 },  # MacBook display with notch
+  { monitor."main" = 50 },      # Main external display with Sketchybar
+  50                            # Default for other external displays
+]
+outer.left = 5
+outer.right = 5
 
 # Window detection customizations
 [[on-window-detected]]
@@ -31,6 +41,11 @@ run = 'layout floating'
 if.app-id = 'com.apple.finder'
 if.window-title-regex-substring = 'Copy|Move|Delete'
 run = 'layout floating'
+
+# Ensure Ghostty windows are tiled
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'layout tiling'
 
 # Key bindings using Meh key (Shift+Ctrl+Alt via Space bar)
 # Requires Karabiner-Elements configuration
@@ -57,49 +72,49 @@ shift-ctrl-alt-cmd-l = 'move right'
 # ============================================================================
 
 # Browser workspace (B)
-shift-ctrl-alt-b = 'workspace B'
-
-# Code/Development workspace (C)
-shift-ctrl-alt-c = 'workspace C'
-
-# Documentation workspace (D)
-shift-ctrl-alt-d = 'workspace D'
-
-# Entertainment workspace (E)
-shift-ctrl-alt-e = 'workspace E'
-
-# Finder/Files workspace (F)
-shift-ctrl-alt-f = 'workspace F'
-
-# Git/GitHub workspace (G)
-shift-ctrl-alt-g = 'workspace G'
-
-# Messages workspace (M) - WhatsApp, Messages, Email, Slack
-shift-ctrl-alt-m = 'workspace M'
-
-# Notes workspace (N)
-shift-ctrl-alt-n = 'workspace N'
-
-# Productivity workspace (P)
-shift-ctrl-alt-p = 'workspace P'
-
-# Research workspace (R)
-shift-ctrl-alt-r = 'workspace R'
-
-# System/Settings workspace (S)
-shift-ctrl-alt-s = 'workspace S'
-
-# Terminal workspace (T)
-shift-ctrl-alt-t = 'workspace T'
-
-# Utilities workspace (U)
-shift-ctrl-alt-u = 'workspace U'
-
-# Video/Virtual meetings workspace (V)
-shift-ctrl-alt-v = 'workspace V'
-
-# Work workspace (W)
-shift-ctrl-alt-w = 'workspace W'
+# shift-ctrl-alt-b = 'workspace B'
+# 
+# # Code/Development workspace (C)
+# shift-ctrl-alt-c = 'workspace C'
+# 
+# # Documentation workspace (D)
+# shift-ctrl-alt-d = 'workspace D'
+# 
+# # Entertainment workspace (E)
+# shift-ctrl-alt-e = 'workspace E'
+# 
+# # Finder/Files workspace (F)
+# shift-ctrl-alt-f = 'workspace F'
+# 
+# # Git/GitHub workspace (G)
+# shift-ctrl-alt-g = 'workspace G'
+# 
+# # Messages workspace (M) - WhatsApp, Messages, Email, Slack
+# shift-ctrl-alt-m = 'workspace M'
+# 
+# # Notes workspace (N)
+# shift-ctrl-alt-n = 'workspace N'
+# 
+# # Productivity workspace (P)
+# shift-ctrl-alt-p = 'workspace P'
+# 
+# # Research workspace (R)
+# shift-ctrl-alt-r = 'workspace R'
+# 
+# # System/Settings workspace (S)
+# shift-ctrl-alt-s = 'workspace S'
+# 
+# # Terminal workspace (T)
+# shift-ctrl-alt-t = 'workspace T'
+# 
+# # Utilities workspace (U)
+# shift-ctrl-alt-u = 'workspace U'
+# 
+# # Video/Virtual meetings workspace (V)
+# shift-ctrl-alt-v = 'workspace V'
+# 
+# # Work workspace (W)
+# shift-ctrl-alt-w = 'workspace W'
 
 # Numeric workspaces for overflow
 shift-ctrl-alt-1 = 'workspace 1'
@@ -115,21 +130,21 @@ shift-ctrl-alt-9 = 'workspace 9'
 # ============================================================================
 # Move windows to workspace (Hyper + letters/numbers = Meh + Cmd)
 # ============================================================================
-shift-ctrl-alt-cmd-b = 'move-node-to-workspace B'
-shift-ctrl-alt-cmd-c = 'move-node-to-workspace C'
-shift-ctrl-alt-cmd-d = 'move-node-to-workspace D'
-shift-ctrl-alt-cmd-e = 'move-node-to-workspace E'
-shift-ctrl-alt-cmd-f = 'move-node-to-workspace F'
-shift-ctrl-alt-cmd-g = 'move-node-to-workspace G'
-shift-ctrl-alt-cmd-m = 'move-node-to-workspace M'
-shift-ctrl-alt-cmd-n = 'move-node-to-workspace N'
-shift-ctrl-alt-cmd-p = 'move-node-to-workspace P'
-shift-ctrl-alt-cmd-r = 'move-node-to-workspace R'
-shift-ctrl-alt-cmd-s = 'move-node-to-workspace S'
-shift-ctrl-alt-cmd-t = 'move-node-to-workspace T'
-shift-ctrl-alt-cmd-u = 'move-node-to-workspace U'
-shift-ctrl-alt-cmd-v = 'move-node-to-workspace V'
-shift-ctrl-alt-cmd-w = 'move-node-to-workspace W'
+# shift-ctrl-alt-cmd-b = 'move-node-to-workspace B'
+# shift-ctrl-alt-cmd-c = 'move-node-to-workspace C'
+# shift-ctrl-alt-cmd-d = 'move-node-to-workspace D'
+# shift-ctrl-alt-cmd-e = 'move-node-to-workspace E'
+# shift-ctrl-alt-cmd-f = 'move-node-to-workspace F'
+# shift-ctrl-alt-cmd-g = 'move-node-to-workspace G'
+# shift-ctrl-alt-cmd-m = 'move-node-to-workspace M'
+# shift-ctrl-alt-cmd-n = 'move-node-to-workspace N'
+# shift-ctrl-alt-cmd-p = 'move-node-to-workspace P'
+# shift-ctrl-alt-cmd-r = 'move-node-to-workspace R'
+# shift-ctrl-alt-cmd-s = 'move-node-to-workspace S'
+# shift-ctrl-alt-cmd-t = 'move-node-to-workspace T'
+# shift-ctrl-alt-cmd-u = 'move-node-to-workspace U'
+# shift-ctrl-alt-cmd-v = 'move-node-to-workspace V'
+# shift-ctrl-alt-cmd-w = 'move-node-to-workspace W'
 
 shift-ctrl-alt-cmd-1 = 'move-node-to-workspace 1'
 shift-ctrl-alt-cmd-2 = 'move-node-to-workspace 2'
@@ -191,30 +206,30 @@ backspace = ['close-all-windows-but-current', 'mode main']
 # Workspace assignments (optional)
 # ============================================================================
 # Assign specific apps to workspaces on launch
-[[on-window-detected]]
-if.app-id = 'com.apple.Safari'
-run = 'move-node-to-workspace B'
-
-[[on-window-detected]]
-if.app-id = 'com.google.Chrome'
-run = 'move-node-to-workspace B'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.Terminal'
-run = 'move-node-to-workspace T'
-
-[[on-window-detected]]
-if.app-id = 'com.googlecode.iterm2'
-run = 'move-node-to-workspace T'
-
-[[on-window-detected]]
-if.app-id = 'com.microsoft.VSCode'
-run = 'move-node-to-workspace C'
-
-[[on-window-detected]]
-if.app-id = 'com.tinyspeck.slackmacgap'
-run = 'move-node-to-workspace M'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.mail'
-run = 'move-node-to-workspace M'
+# [[on-window-detected]]
+# if.app-id = 'com.apple.Safari'
+# run = 'move-node-to-workspace B'
+# 
+# [[on-window-detected]]
+# if.app-id = 'com.google.Chrome'
+# run = 'move-node-to-workspace B'
+# 
+# [[on-window-detected]]
+# if.app-id = 'com.apple.Terminal'
+# run = 'move-node-to-workspace T'
+# 
+# [[on-window-detected]]
+# if.app-id = 'com.googlecode.iterm2'
+# run = 'move-node-to-workspace T'
+# 
+# [[on-window-detected]]
+# if.app-id = 'com.microsoft.VSCode'
+# run = 'move-node-to-workspace C'
+# 
+# [[on-window-detected]]
+# if.app-id = 'com.tinyspeck.slackmacgap'
+# run = 'move-node-to-workspace M'
+# 
+# [[on-window-detected]]
+# if.app-id = 'com.apple.mail'
+# run = 'move-node-to-workspace M'

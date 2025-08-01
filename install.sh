@@ -289,6 +289,38 @@ install_karabiner() {
     log_info "Karabiner-Elements configured. Please open it and enable the 'Aerospace Meh Key' profile."
 }
 
+install_sketchybar() {
+    log_info "Setting up SketchyBar..."
+    
+    # Install SketchyBar via Homebrew if not installed
+    if ! command -v sketchybar &> /dev/null; then
+        log_info "Installing SketchyBar..."
+        brew tap FelixKratz/formulae
+        brew install sketchybar
+    else
+        log_info "SketchyBar already installed"
+    fi
+    
+    # Install SketchyBar app font for proper app icons
+    local font_path="$HOME/Library/Fonts/sketchybar-app-font.ttf"
+    if [[ ! -f "$font_path" ]]; then
+        log_info "Installing SketchyBar app font..."
+        curl -L https://github.com/kvndrsslr/sketchybar-app-font/releases/download/v2.0.25/sketchybar-app-font.ttf -o "$font_path"
+        log_info "SketchyBar app font installed"
+    else
+        log_info "SketchyBar app font already installed"
+    fi
+    
+    # Link configuration
+    if [[ -d "$DOTFILES/sketchybar" ]]; then
+        create_symlink "$DOTFILES/sketchybar" "$HOME/.config/sketchybar"
+    fi
+    
+    # Start SketchyBar service
+    log_info "Starting SketchyBar service..."
+    brew services start sketchybar || log_warn "Could not start SketchyBar service. You may need to start it manually."
+}
+
 # ============================================================================
 # Main Installation
 # ============================================================================
@@ -312,6 +344,7 @@ main() {
     install_tmux
     install_ghostty
     install_karabiner
+    install_sketchybar
     install_aerospace
     
     log_info "Installation complete!"
