@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# Backup files
+*.backup
+*.bak
+*_backup/
+
+# Private/Local files
+*.local
+.env
+.secrets
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# Log files
+*.log
+
+# SSH keys (never commit these!)
+id_rsa*
+id_ed25519*
+*.pem
+*.key
+
+# Claude settings
+.claude/

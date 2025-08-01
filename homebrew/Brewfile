@@ -1,0 +1,60 @@
+# ============================================================================
+# Homebrew Bundle - Package definitions
+# ============================================================================
+# Usage: brew bundle --file=~/.dotfiles/homebrew/Brewfile
+
+# Taps
+tap "homebrew/bundle"
+tap "homebrew/services"
+tap "nikitabobko/tap"
+
+# ============================================================================
+# Command Line Tools
+# ============================================================================
+# Essentials
+brew "git"
+brew "zsh"
+brew "tmux"
+brew "neovim"
+brew "starship"
+
+# Modern CLI replacements
+brew "bat"        # Better cat
+brew "eza"        # Better ls
+brew "fd"         # Better find
+brew "ripgrep"    # Better grep
+brew "fzf"        # Fuzzy finder
+brew "zoxide"     # Better cd
+
+# Development tools
+brew "node"
+brew "python"
+brew "go"
+brew "rust"
+
+# Utilities
+brew "jq"         # JSON processor
+brew "yq"         # YAML processor
+brew "tree"       # Directory viewer
+brew "wget"       # Download tool
+brew "httpie"     # Better curl
+brew "gh"         # GitHub CLI
+
+# ============================================================================
+# Cask Applications (GUI)
+# ============================================================================
+# Terminals & Editors
+cask "ghostty"
+cask "visual-studio-code"
+
+# Development
+cask "docker"
+
+# Productivity
+cask "aerospace"  # Tiling window manager
+cask "karabiner-elements"  # Keyboard customization for Meh key
+# cask "rectangle"  # Window management (replaced by aerospace)
+# cask "raycast"    # Spotlight replacement
+
+# Utilities
+cask "stats"      # System monitor for the menubar

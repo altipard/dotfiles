@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# ============================================================================
+# Standalone script to install tmux plugins
+# ============================================================================
+
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m'
+
+echo -e "${GREEN}Installing tmux plugins...${NC}"
+
+# Check if TPM is installed
+if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
+    echo -e "${YELLOW}TPM not found. Installing...${NC}"
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+fi
+
+# Install plugins using TPM's install script directly
+if [[ -x "$HOME/.tmux/plugins/tpm/bin/install_plugins" ]]; then
+    "$HOME/.tmux/plugins/tpm/bin/install_plugins"
+    echo -e "${GREEN}Tmux plugins installed successfully!${NC}"
+else
+    echo -e "${YELLOW}TPM install script not found. Please run this in tmux:${NC}"
+    echo "Prefix + I (Ctrl-a then Shift-i)"
+fi
