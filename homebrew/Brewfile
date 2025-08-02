@@ -31,6 +31,7 @@ brew "zoxide"     # Better cd
 brew "node"
 brew "python"
 brew "go"
+brew "lua"
 brew "rust"
 
 # Utilities
@@ -55,8 +56,9 @@ cask "docker"
 cask "aerospace"  # Tiling window manager
 cask "karabiner-elements"  # Keyboard customization for Meh key
 brew "sketchybar"  # Customizable macOS status bar
+cask "raycast"    # Spotlight replacement
 # cask "rectangle"  # Window management (replaced by aerospace)
-# cask "raycast"    # Spotlight replacement
 
 # Utilities
 cask "stats"      # System monitor for the menubar
+cask "sf-symbols"
