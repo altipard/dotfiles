@@ -14,20 +14,12 @@ local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
 require('lazy').setup({
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			"nvim-tree/nvim-web-devicons",
-		},
-	},
-	{
-		"rose-pine/neovim",
-		name = "rose-pine",
-		config = function()
-			vim.cmd.colorscheme "rose-pine"
-		end
-	},
+    require 'plugins.neotree',
+    require 'plugins.bufferline',
+    require 'plugins.lualine',   
+    require 'plugins.colortheme',
+    require 'plugins.lsp',
+    require 'plugins.telescope',
+    require 'plugins.treesitter',
+    require 'plugins.harpoon'
 })

@@ -83,3 +83,11 @@ eval "$(starship init zsh)"
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
+
+# ============================================================================
+# Enhanced Configuration Integration
+# ============================================================================
+# Enhanced settings that complement existing configuration
+[ -f "$HOME/.dotfiles/zsh/enhanced-settings.zsh" ] && source "$HOME/.dotfiles/zsh/enhanced-settings.zsh"
+[ -f "$HOME/.dotfiles/zsh/enhanced-aliases.zsh" ] && source "$HOME/.dotfiles/zsh/enhanced-aliases.zsh"
+[ -f "$HOME/.dotfiles/zsh/theme-config.zsh" ] && source "$HOME/.dotfiles/zsh/theme-config.zsh"

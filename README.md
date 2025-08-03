@@ -1,24 +1,38 @@
-# Dotfiles
+# Modern macOS Development Environment
 
-My personal macOS configuration with automated installation.
+> A comprehensive, modular dotfiles collection for productive macOS development with automated setup and cutting-edge tools.
 
-## Structure
+## Quick Start
 
+```bash
+# Clone and install
+git clone https://github.com/daltiparmak/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles && ./install.sh
+
+# Update existing installation
+./update.sh
 ```
-.dotfiles/
-├── zsh/          # Zsh Configuration
-├── git/          # Git Configuration
-├── nvim/         # Neovim Configuration
-├── tmux/         # Tmux Configuration
-├── homebrew/     # Homebrew Packages (Brewfile)
-├── aerospace/   # Aerospace Window Manager
-├── karabiner/    # Karabiner-Elements (Keyboard Remapping)
-├── sketchybar/   # SketchyBar (macOS Status Bar)
-├── ghostty/      # Ghostty Terminal
-├── macos/        # macOS-specific Settings
-├── bin/          # Custom Scripts
-└── config/       # Additional App Configurations
-```
+
+## Configuration Components
+
+| Component | Description | Documentation |
+|-----------|-------------|---------------|
+| [zsh/](zsh/README.md) | Advanced shell with enhanced aliases and integrations | [Guide](zsh/README.md) |
+| [nvim/](nvim/README.md) | Modern Neovim setup with LSP and plugins | [Guide](nvim/README.md) |
+| [tmux/](tmux/README.md) | Terminal multiplexer with Nordic theme | [Guide](tmux/README.md) |
+| [kitty/](kitty/README.md) | GPU-accelerated terminal emulator | [Guide](kitty/README.md) |
+| [starship/](starship/README.md) | Cross-shell prompt with git integration | [Guide](starship/README.md) |
+| [aerospace/](aerospace/README.md) | Tiling window manager with Meh-key setup | [Guide](aerospace/README.md) |
+| [karabiner/](karabiner/README.md) | Keyboard remapping for Space-key modifiers (NOT ACTIVE) | [Guide](karabiner/README.md) |
+| [sketchybar/](sketchybar/README.md) | Customizable status bar replacement | [Guide](sketchybar/README.md) |
+| ghostty/ | Modern terminal with native macOS integration | [Built-in docs](#ghostty) |
+| homebrew/ | Package management via Brewfile | [Built-in docs](#homebrew) |
+
+## Quick Reference
+
+- **[Complete Cheat Sheet](CHEATSHEET.md)** - All keyboard shortcuts and commands
+- **[Installation Guide](#installation)** - Detailed setup instructions
+- **[Customization](#customization)** - How to modify configurations
 
 ## Installation
 

@@ -249,6 +249,42 @@ install_ghostty() {
     fi
 }
 
+install_kitty() {
+    log_info "Setting up Kitty terminal configuration..."
+    
+    # Install Kitty via Homebrew if not installed
+    if ! command -v kitty &> /dev/null; then
+        log_info "Installing Kitty..."
+        brew install --cask kitty
+    else
+        log_info "Kitty already installed"
+    fi
+    
+    # Install required fonts
+    log_info "Installing required fonts for Kitty..."
+    
+    # Install JetBrainsMono Nerd Font
+    if ! ls ~/Library/Fonts/JetBrainsMonoNerdFont*.ttf &> /dev/null 2>&1; then
+        log_info "Installing JetBrainsMono Nerd Font..."
+        brew install --cask font-jetbrains-mono-nerd-font || log_warn "Could not install JetBrainsMono Nerd Font via Homebrew"
+    else
+        log_info "JetBrainsMono Nerd Font already installed"
+    fi
+    
+    # Install Symbols Nerd Font (included in Nerd Fonts)
+    if ! ls ~/Library/Fonts/SymbolsNerdFont*.ttf &> /dev/null 2>&1; then
+        log_info "Installing Symbols Nerd Font..."
+        brew install --cask font-symbols-only-nerd-font || log_warn "Could not install Symbols Nerd Font via Homebrew"
+    else
+        log_info "Symbols Nerd Font already installed"
+    fi
+    
+    # Link configuration files
+    if [[ -d "$DOTFILES/kitty" ]]; then
+        create_symlink "$DOTFILES/kitty" "$HOME/.config/kitty"
+    fi
+}
+
 install_aerospace() {
     log_info "Setting up Aerospace window manager..."
     
@@ -287,6 +323,23 @@ install_karabiner() {
     fi
     
     log_info "Karabiner-Elements configured. Please open it and enable the 'Aerospace Meh Key' profile."
+}
+
+install_starship() {
+    log_info "Setting up Starship prompt..."
+    
+    # Install Starship via Homebrew if not installed
+    if ! command -v starship &> /dev/null; then
+        log_info "Installing Starship..."
+        brew install starship
+    else
+        log_info "Starship already installed"
+    fi
+    
+    # Link configuration
+    if [[ -f "$DOTFILES/starship/starship.toml" ]]; then
+        create_symlink "$DOTFILES/starship/starship.toml" "$HOME/.config/starship.toml"
+    fi
 }
 
 install_sketchybar() {
@@ -342,7 +395,9 @@ main() {
     install_git
     install_nvim
     install_tmux
+    install_starship
     install_ghostty
+    install_kitty
     install_karabiner
     install_sketchybar
     install_aerospace
