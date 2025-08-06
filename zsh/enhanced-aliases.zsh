@@ -37,6 +37,11 @@ alias lzd='lazydocker'
 alias weather='curl wttr.in'
 alias myip='curl ipinfo.io/ip'
 
+# Eza
+alias l="eza -l --icons --git -a"
+alias lt="eza --tree --level=2 --long --icons --git"
+alias ltree="eza --tree --level=2  --icons --git"
+
 # Directory navigation
 alias -g ...='../..'
 alias -g ....='../../..'
