@@ -6,6 +6,11 @@ export LC_TIME=de_DE.UTF-8
 export EDITOR="nvim"
 export ARCHFLAGS="-arch arm64"
 
+# Enable colors in terminal
+export CLICOLOR=1
+# Gruvbox-inspired LS_COLORS for better file type distinction
+export LS_COLORS='di=1;34:ln=1;36:so=1;35:pi=33:ex=1;32:bd=1;33:cd=1;33:su=30;41:sg=30;46:tw=30;42:ow=30;43:*.tar=1;31:*.tgz=1;31:*.zip=1;31:*.gz=1;31:*.bz2=1;31:*.jpg=1;35:*.jpeg=1;35:*.png=1;35:*.gif=1;35:*.bmp=1;35:*.pdf=1;33:*.doc=1;33:*.docx=1;33:*.txt=0;37:*.md=1;37:*.py=1;32:*.js=1;32:*.ts=1;32:*.jsx=1;32:*.tsx=1;32:*.css=1;36:*.scss=1;36:*.html=1;35:*.json=1;33:*.yml=1;33:*.yaml=1;33:*.toml=1;33:*.rs=1;31:*.go=1;34:*.c=1;34:*.cpp=1;34:*.h=1;34:*.hpp=1;34'
+
 # ============================================================================
 # PATH Configuration
 # ============================================================================
@@ -15,10 +20,22 @@ export PATH="$HOME/.local/bin:$PATH"
 # ============================================================================
 # Aliases
 # ============================================================================
-# System
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+# System - Use eza for better file listings with colors and icons
+if command -v eza &> /dev/null; then
+  alias ls='eza --color=always --icons'
+  alias ll='eza -alF --color=always --icons --group-directories-first'
+  alias la='eza -a --color=always --icons --group-directories-first'
+  alias l='eza -F --color=always --icons --group-directories-first'
+  alias lt='eza --tree --color=always --icons --level=2'
+  alias tree='eza --tree --color=always --icons'
+else
+  # Fallback to regular ls with colors
+  alias ls='ls --color=auto'
+  alias ll='ls -alF --color=auto'
+  alias la='ls -A --color=auto'
+  alias l='ls -CF --color=auto'
+fi
+
 alias cat='bat'
 alias grep='grep --color=auto'
 alias ..='cd ..'
@@ -51,16 +68,32 @@ if command -v brew &> /dev/null; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# McFly - intelligent shell history search
-if command -v mcfly &> /dev/null; then
-  eval "$(mcfly init zsh)"
-fi
-
 # Always work in a tmux session if Tmux is installed
 if which tmux 2>&1 >/dev/null; then
   if [ $TERM != "screen-256color" ] && [  $TERM != "screen" ]; then
     tmux attach -t default || tmux new -s default; exit
   fi
+fi
+
+# McFly - intelligent shell history search (must be after tmux check)
+if command -v mcfly &> /dev/null; then
+  eval "$(mcfly init zsh)"
+  # Force the keybinding in case it didn't work
+  bindkey '^R' mcfly-history-widget
+fi
+
+# Zsh Autosuggestions - Fish-like autosuggestions for zsh
+if [[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  # Optional: Set suggestion color (default is gray)
+  ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=240'
+  # Accept suggestion with right arrow key
+  bindkey '→' autosuggest-accept
+fi
+
+# Zsh Syntax Highlighting - Fish-like syntax highlighting for zsh
+if [[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # ============================================================================
@@ -88,3 +121,4 @@ eval "$(zoxide init zsh)"
 [ -f "$HOME/.dotfiles/zsh/enhanced-settings.zsh" ] && source "$HOME/.dotfiles/zsh/enhanced-settings.zsh"
 [ -f "$HOME/.dotfiles/zsh/enhanced-aliases.zsh" ] && source "$HOME/.dotfiles/zsh/enhanced-aliases.zsh"
 [ -f "$HOME/.dotfiles/zsh/theme-config.zsh" ] && source "$HOME/.dotfiles/zsh/theme-config.zsh"
+[ -f "$HOME/.dotfiles/zsh/gruvbox-theme.zsh" ] && source "$HOME/.dotfiles/zsh/gruvbox-theme.zsh"

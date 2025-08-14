@@ -1,5 +1,5 @@
 function ColorMyPencils(color)
-	color = color or "tokyonight"
+	color = color or "gruvbox"
 	vim.cmd.colorscheme(color)
 
 	-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -13,16 +13,10 @@ return {
     },
 
     {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        opts = {},
-        config = function()
-            ColorMyPencils()
-        end
-    },
-    {
         "ellisonleao/gruvbox.nvim",
         name = "gruvbox",
+        lazy = false,
+        priority = 1000,
         config = function()
             require("gruvbox").setup({
                 terminal_colors = true, -- add neovim terminal colors
@@ -48,6 +42,7 @@ return {
                 dim_inactive = false,
                 transparent_mode = false,
             })
+            ColorMyPencils()
         end,
     },
     {
@@ -82,8 +77,6 @@ return {
                     italic = false,
                 },
             })
-
-            ColorMyPencils();
         end
     },
 }
