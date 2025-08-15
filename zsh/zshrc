@@ -69,18 +69,13 @@ if command -v brew &> /dev/null; then
 fi
 
 # Always work in a tmux session if Tmux is installed
-if which tmux 2>&1 >/dev/null; then
-  if [ $TERM != "screen-256color" ] && [  $TERM != "screen" ]; then
-    tmux attach -t default || tmux new -s default; exit
-  fi
-fi
+# if which tmux 2>&1 >/dev/null; then
+#   if [ $TERM != "screen-256color" ] && [  $TERM != "screen" ]; then
+#     tmux attach -t default || tmux new -s default; exit
+#   fi
+# fi
 
-# McFly - intelligent shell history search (must be after tmux check)
-if command -v mcfly &> /dev/null; then
-  eval "$(mcfly init zsh)"
-  # Force the keybinding in case it didn't work
-  bindkey '^R' mcfly-history-widget
-fi
+# McFly will be initialized at the end of the file
 
 # Zsh Autosuggestions - Fish-like autosuggestions for zsh
 if [[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
@@ -111,9 +106,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
-
 # ============================================================================
 # Enhanced Configuration Integration
 # ============================================================================
@@ -122,3 +114,30 @@ eval "$(zoxide init zsh)"
 [ -f "$HOME/.dotfiles/zsh/enhanced-aliases.zsh" ] && source "$HOME/.dotfiles/zsh/enhanced-aliases.zsh"
 [ -f "$HOME/.dotfiles/zsh/theme-config.zsh" ] && source "$HOME/.dotfiles/zsh/theme-config.zsh"
 [ -f "$HOME/.dotfiles/zsh/gruvbox-theme.zsh" ] && source "$HOME/.dotfiles/zsh/gruvbox-theme.zsh"
+
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+
+# ============================================================================
+# McFly - MUST be loaded absolutely last to ensure keybindings work
+# ============================================================================
+if command -v mcfly &> /dev/null; then
+  # Suchverhalten
+  export MCFLY_FUZZY=2                    # Mittlere Fuzzy-Suche
+  export MCFLY_RESULTS=25                 # 25 Ergebnisse anzeigen
+  
+  # Interface
+  export MCFLY_KEY_SCHEME=vim             # vim-Keys (j/k Navigation)
+  export MCFLY_PROMPT="❯"                 # Prompt-Symbol
+  # MCFLY_LIGHT nicht gesetzt = Dark Mode
+  
+  # History-Verwaltung  
+  export MCFLY_HISTORY_LIMIT=200000       # Große History (200k Einträge)
+  # MCFLY_DELETE_WITHOUT_CONFIRM nicht gesetzt = Bestätigung beim Löschen
+  
+  # McFly initialisieren
+  eval "$(mcfly init zsh)"
+  
+  # Keybinding sicherstellen
+  bindkey '^R' mcfly-history-widget
+fi
