@@ -27,6 +27,12 @@ brew "ripgrep"    # Better grep
 brew "fzf"        # Fuzzy finder
 brew "zoxide"     # Better cd
 
+# Zsh enhancements
+brew "zsh-autosuggestions"    # Fish-like autosuggestions
+brew "zsh-syntax-highlighting" # Fish-like syntax highlighting
+brew "zsh-autocomplete"        # Real-time autocomplete menu with arrow navigation
+brew "mcfly"                   # Intelligent command history search
+
 # Development tools
 brew "node"
 brew "python"

@@ -91,6 +91,18 @@ if [[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# Zsh Autocomplete - Real-time autocomplete menu with arrow key navigation
+# MUST be loaded AFTER syntax-highlighting to avoid conflicts
+if [[ -f /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]]; then
+  source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+  
+  # Configure autocomplete behavior
+  zstyle ':autocomplete:*' min-input 1  # Start showing suggestions after 1 character
+  zstyle ':autocomplete:*' widget-style menu-select  # Use menu selection style
+  zstyle ':autocomplete:*' fzf-completion yes  # Enable fzf integration if available
+  zstyle ':autocomplete:*' default-context history-incremental-search-backward
+fi
+
 # ============================================================================
 # Additional Settings
 # ============================================================================
