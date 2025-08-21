@@ -2,46 +2,63 @@
 return {
   'nvim-lualine/lualine.nvim',
   config = function()
-    -- Adapted from: https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/themes/onedark.lua
+    -- Gruvbox color palette
     local colors = {
-      blue = '#61afef',
-      green = '#98c379',
-      purple = '#c678dd',
-      cyan = '#56b6c2',
-      red1 = '#e06c75',
-      red2 = '#be5046',
-      yellow = '#e5c07b',
-      fg = '#abb2bf',
-      bg = '#282c34',
-      gray1 = '#828997',
-      gray2 = '#2c323c',
-      gray3 = '#3e4452',
+      dark0_hard = '#1d2021',
+      dark0 = '#282828',
+      dark0_soft = '#32302f',
+      dark1 = '#3c3836',
+      dark2 = '#504945',
+      dark3 = '#665c54',
+      dark4 = '#7c6f64',
+      light0_hard = '#f9f5d7',
+      light0 = '#fbf1c7',
+      light0_soft = '#f2e5bc',
+      light1 = '#ebdbb2',
+      light2 = '#d5c4a1',
+      light3 = '#bdae93',
+      light4 = '#a89984',
+      bright_red = '#fb4934',
+      bright_green = '#b8bb26',
+      bright_yellow = '#fabd2f',
+      bright_blue = '#83a598',
+      bright_purple = '#d3869b',
+      bright_aqua = '#8ec07c',
+      bright_orange = '#fe8019',
+      neutral_red = '#cc241d',
+      neutral_green = '#98971a',
+      neutral_yellow = '#d79921',
+      neutral_blue = '#458588',
+      neutral_purple = '#b16286',
+      neutral_aqua = '#689d6a',
+      neutral_orange = '#d65d0e',
     }
 
-    local onedark_theme = {
+    local gruvbox_theme = {
       normal = {
-        a = { fg = colors.bg, bg = colors.green, gui = 'bold' },
-        b = { fg = colors.fg, bg = colors.gray3 },
-        c = { fg = colors.fg, bg = colors.gray2 },
+        a = { fg = colors.dark0, bg = colors.neutral_green, gui = 'bold' },
+        b = { fg = colors.light1, bg = colors.dark2 },
+        c = { fg = colors.light3, bg = colors.dark1 },
       },
-      command = { a = { fg = colors.bg, bg = colors.yellow, gui = 'bold' } },
-      insert = { a = { fg = colors.bg, bg = colors.blue, gui = 'bold' } },
-      visual = { a = { fg = colors.bg, bg = colors.purple, gui = 'bold' } },
-      terminal = { a = { fg = colors.bg, bg = colors.cyan, gui = 'bold' } },
-      replace = { a = { fg = colors.bg, bg = colors.red1, gui = 'bold' } },
+      command = { a = { fg = colors.dark0, bg = colors.neutral_yellow, gui = 'bold' } },
+      insert = { a = { fg = colors.dark0, bg = colors.neutral_blue, gui = 'bold' } },
+      visual = { a = { fg = colors.dark0, bg = colors.neutral_orange, gui = 'bold' } },
+      terminal = { a = { fg = colors.dark0, bg = colors.neutral_aqua, gui = 'bold' } },
+      replace = { a = { fg = colors.dark0, bg = colors.neutral_red, gui = 'bold' } },
       inactive = {
-        a = { fg = colors.gray1, bg = colors.bg, gui = 'bold' },
-        b = { fg = colors.gray1, bg = colors.bg },
-        c = { fg = colors.gray1, bg = colors.gray2 },
+        a = { fg = colors.dark4, bg = colors.dark1, gui = 'bold' },
+        b = { fg = colors.dark4, bg = colors.dark0 },
+        c = { fg = colors.dark4, bg = colors.dark0_soft },
       },
     }
 
     -- Import color theme based on environment variable NVIM_THEME
-    local env_var_nvim_theme = os.getenv 'NVIM_THEME' or 'nord'
+    local env_var_nvim_theme = os.getenv 'NVIM_THEME' or 'gruvbox'
 
     -- Define a table of themes
     local themes = {
-      onedark = onedark_theme,
+      gruvbox = gruvbox_theme,
+      onedark = 'onedark',
       nord = 'nord',
     }
 
@@ -84,7 +101,7 @@ return {
     require('lualine').setup {
       options = {
         icons_enabled = true,
-        theme = themes[env_var_nvim_theme], -- Set theme based on environment variable
+        theme = 'gruvbox', -- Use built-in gruvbox theme
         -- Some useful glyphs:
         -- https://www.nerdfonts.com/cheat-sheet
         --        
