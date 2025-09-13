@@ -99,7 +99,8 @@ preexec() {
 }
 
 # Enhanced key bindings
-bindkey '^R' history-incremental-search-backward
+# Note: ^R is handled by McFly in zshrc, don't override it here
+# bindkey '^R' history-incremental-search-backward  # Disabled - McFly handles this
 bindkey '^F' forward-word
 bindkey '^B' backward-word
 bindkey '^A' beginning-of-line

@@ -91,17 +91,25 @@ if [[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-# Zsh Autocomplete - Real-time autocomplete menu with arrow key navigation
-# MUST be loaded AFTER syntax-highlighting to avoid conflicts
-if [[ -f /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]]; then
-  source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-  
-  # Configure autocomplete behavior
-  zstyle ':autocomplete:*' min-input 1  # Start showing suggestions after 1 character
-  zstyle ':autocomplete:*' widget-style menu-select  # Use menu selection style
-  zstyle ':autocomplete:*' fzf-completion yes  # Enable fzf integration if available
-  zstyle ':autocomplete:*' default-context history-incremental-search-backward
-fi
+# Zsh Autocomplete - DISABLED because it interferes with standard tab completion
+# Uncomment the following lines if you want to re-enable it
+# if [[ -f /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh ]]; then
+#   source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+#   
+#   # Configure autocomplete behavior
+#   zstyle ':autocomplete:*' min-input 1  # Start showing suggestions after 1 character
+#   zstyle ':autocomplete:*' widget-style menu-select  # Use menu selection style
+#   zstyle ':autocomplete:*' fzf-completion yes  # Enable fzf integration if available
+#   zstyle ':autocomplete:*' default-context history-incremental-search-backward
+# fi
+
+# Standard Zsh Completion Configuration
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%B%d%b'
 
 # ============================================================================
 # Additional Settings
@@ -126,6 +134,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -f "$HOME/.dotfiles/zsh/enhanced-aliases.zsh" ] && source "$HOME/.dotfiles/zsh/enhanced-aliases.zsh"
 [ -f "$HOME/.dotfiles/zsh/theme-config.zsh" ] && source "$HOME/.dotfiles/zsh/theme-config.zsh"
 [ -f "$HOME/.dotfiles/zsh/gruvbox-theme.zsh" ] && source "$HOME/.dotfiles/zsh/gruvbox-theme.zsh"
+[ -f "$HOME/.dotfiles/zsh/improved-history-navigation.zsh" ] && source "$HOME/.dotfiles/zsh/improved-history-navigation.zsh"
 
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
